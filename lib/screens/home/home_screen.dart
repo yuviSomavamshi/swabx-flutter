@@ -19,7 +19,6 @@ class _MyHomeScreenState extends State<MyHomeScreen> {
   @override
   void initState() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
-    //_authenticateMe();
     super.initState();
   }
 

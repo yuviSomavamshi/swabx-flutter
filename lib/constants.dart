@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 const kAppName = "SwabX";
 const kAppTitleText = "Swab";
 const kWebsite = "https://swabx.healthx.global";
+//const kWebsite = "http://192.168.0.101";
 const kPrimaryColor = Color(0xFF112855);
 const kPrimaryCustomColor = Color(0XFFF58C29);
 const kTracieFontFamily = "Kaushan Script";
@@ -61,7 +62,7 @@ SliverToBoxAdapter buildPreventionTips(double screenHeight, double percent) {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            'COVID-19 Prevention Tips',
+            'Safety Tips',
             style: const TextStyle(
               fontSize: 18.0,
               fontWeight: FontWeight.w600,
@@ -124,7 +125,7 @@ SliverToBoxAdapter buildTogether(double screenHeight, double percentage) {
               ),
               SizedBox(height: screenHeight * 0.01),
               Text(
-                'Lets beat COVID-19 together\nprotect yourself, protect others.',
+                'Lets beat this Pandemic Together.',
                 style: const TextStyle(
                   color: Colors.white,
                   fontSize: 14.0,
@@ -391,12 +392,12 @@ const String kEmailNullError = "Please Enter your email";
 const String kInvalidEmailError = "Please Enter Valid Email";
 const String kPassNullError = "Please Enter your password";
 const String kPassValid =
-    "Secure Password Tips:\t\n\t\t* Use at least 8 characters, a combination of\nnumbers, special characters and letters\n\t\t* at least one lowercase letter.\n\t\t* at least one uppercase letter.\n\t\t* at least one number.\n\t\t* at least one of these special character \n !@#\$%^&";
+    "Secure Password Tips:\t\n\t\t* Use at least 8 characters, a combination of\nnumbers, special characters and letters\n\t\t* at least one lowercase letter.\n\t\t* at least one uppercase letter.\n\t\t* at least one number.\n\t\t* at least one of these special characters \n !@#\$%^&";
 const String kShortPassError = "Password is too short, minimum of 8 characters";
 const String kMatchPassError = "Passwords don't match";
 const String kICPassportNullError = "Please Enter your IC/Passport details";
 const String kNamelValid =
-    "Name can contain\n*. 1 or more lowercase/uppercase \n\talphabetical character.\n*. 1 or more numeric character.\n*. Allowed special characters are underscore\n\t and Space";
+    "Name can contain\n*. 1 or more lowercase/uppercase \n\talphabetical characters.\n*. 1 or more numeric characters.\n*. Allowed special characters are underscore\n\t and Space";
 const String kLocationNameNullError = "Please enter location name";
 const String kNamelNullError = "Please Enter your name";
 const String kNameFNullError = "Please Enter name field";

@@ -23,8 +23,8 @@ class ScanPatientQRCode extends StatelessWidget {
             ),
           ),
           centerTitle: true,
-          title: Text("Scan Patient QR Code",
-              style: TextStyle(color: Colors.white)),
+          title:
+              Text("Scan User QR Code", style: TextStyle(color: Colors.white)),
         ),
         body: ScanPatientQRCodeForm());
   }

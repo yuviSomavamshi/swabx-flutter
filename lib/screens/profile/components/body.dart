@@ -73,7 +73,7 @@ class Body extends StatelessWidget {
                                   .pushNamed(ChangePasswordScreen.routeName);
                             },
                           ),
-                          if (role == "Staff")
+                          if (role == "Staff" || role == "Patient")
                             ProfileMenu(
                               text: "Default Test Location",
                               icon: "assets/icons/Discover.svg",

@@ -37,7 +37,7 @@ class _SignFormState extends State<SignForm> {
       child: Column(
         children: [
           buildEmailFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(15)),
           buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(5)),
           Row(
@@ -151,6 +151,7 @@ class _SignFormState extends State<SignForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      maxLength: 255,
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
       validator: (value) {

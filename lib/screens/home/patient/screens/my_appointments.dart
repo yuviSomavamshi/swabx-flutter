@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:swabx/components/default_button.dart';
 import 'package:swabx/helper/APIService.dart';
+import 'package:swabx/helper/SharedPreferencesHelper.dart';
 import 'package:swabx/models/Appointment.dart';
+import 'package:swabx/screens/default_test_location/default_test_location_screen.dart';
 import 'package:swabx/screens/home/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:swabx/constants.dart';
@@ -73,8 +77,21 @@ class _MyAppointmentsState extends State<MyAppointments> {
                   ],
                 ),
                 floatingActionButton: new FloatingActionButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, BookAnAppointment.routeName);
+                  onPressed: () async {
+                    String locationId = await SharedPreferencesHelper.getString(
+                        "DefaultTestLocationId");
+
+                    if (locationId == null || locationId == "-1") {
+                      Toast.show(
+                          "Please select the Default Test Location", context,
+                          duration: kToastDuration, gravity: Toast.BOTTOM);
+                      Timer(Duration(seconds: kToastDuration), () {
+                        Navigator.pushNamed(
+                            context, DefaultTestLocation.routeName);
+                      });
+                    } else {
+                      Navigator.pushNamed(context, BookAnAppointment.routeName);
+                    }
                   },
                   child: Icon(
                     Icons.add,

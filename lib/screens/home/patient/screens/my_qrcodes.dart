@@ -93,7 +93,7 @@ class _MyRegisteredQrCodesState extends State<MyRegisteredQrCodes> {
                   size: 29,
                 ),
                 backgroundColor: kPrimaryColor,
-                tooltip: 'Register Patient',
+                tooltip: 'Register User',
                 elevation: 5,
                 splashColor: Colors.grey,
               )

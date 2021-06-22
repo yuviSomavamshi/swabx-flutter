@@ -75,7 +75,8 @@ class _MyGrid extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Image.asset('assets/images/' + image + '.png',
-                    height: getProportionateScreenHeight(50), width: getProportionateScreenWidth(50)),
+                    height: getProportionateScreenHeight(50),
+                    width: getProportionateScreenWidth(50)),
                 Text(title,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,

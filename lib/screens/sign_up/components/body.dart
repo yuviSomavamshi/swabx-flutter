@@ -26,18 +26,18 @@ class Body extends StatelessWidget {
                   "Complete your details and continue",
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: SizeConfig.screenHeight * 0.04),
+                SizedBox(height: SizeConfig.screenHeight * 0.02),
                 SignUpForm(),
                 SizedBox(height: getProportionateScreenHeight(20)),
                 Text(
-                  'By continuing your confirm that you agree \nwith our Term and Condition',
+                  'By continuing your confirm that you agree \nwith our Terms and Conditions',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.caption,
                 ),
                 SizedBox(height: getProportionateScreenHeight(30)),
                 Text("Secure Password Tips:"),
                 Text(
-                    "Use at least 8 characters, a combination of numbers, special characters and letters\n\t\t* at least one lowercase letter.\n\t\t* at least one uppercase letter.\n\t\t* at least one number.\n\t\t* at least one of these special character !@#\$%^&\n\t",
+                    "Use at least 8 characters, a combination of numbers, special characters and letters\n\t\t* at least one lowercase letter.\n\t\t* at least one uppercase letter.\n\t\t* at least one number.\n\t\t* at least one of these special characters !@#\$%^&\n\t",
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.caption)
               ],

@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:swabx/helper/SharedPreferencesHelper.dart';
 import 'package:swabx/models/API.dart';
@@ -11,6 +13,7 @@ import 'package:swabx/models/Slot.dart';
 import 'package:swabx/models/user.dart';
 import 'package:meta/meta.dart';
 import '../constants.dart';
+import 'Convertor.dart';
 import 'navigate.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +24,13 @@ class APIService {
   APIService() {
     BaseOptions options = BaseOptions(
         receiveTimeout: 10000, sendTimeout: 5000, connectTimeout: 5000);
-    _dio = Dio(options);  
+    _dio = Dio(options);
+    (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (HttpClient client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+      return client;
+    };
     _dio.options.baseUrl = _endpoint;
     _dio.interceptors
         .add(InterceptorsWrapper(onRequest: (options, handler) async {
@@ -54,6 +63,7 @@ class APIService {
       // If you want to reject the request with a error message,
       // you can reject a `DioError` object eg: return `dio.reject(dioError)`
     }, onError: (DioError error, handler) async {
+      print(error.response);
       if (error.type == DioErrorType.other ||
           error.type == DioErrorType.connectTimeout ||
           error.type == DioErrorType.receiveTimeout) {
@@ -79,6 +89,12 @@ class APIService {
           options.headers["User-Agent"] = "HealthX-Mobile";
           options.headers["Accept"] = "application/json";
 
+          print({
+            "Authorization": "Bearer " + token,
+            "Cookie": "refreshToken=" + cookie,
+            "User-Agent": "HealthX-Mobile",
+            "Accept": "application/json"
+          });
           var response = await http.post(
               Uri.parse(_endpoint + "/accounts/refresh-token"),
               body: {},
@@ -235,9 +251,11 @@ class APIService {
       {@required String barcode,
       @required String date,
       @required String time,
-      @required String location,
-      @required String diagnosis}) async {
+      @required String diagnosis,
+      @required String patientId}) async {
     try {
+      String location =
+          await SharedPreferencesHelper.getString("DefaultTestLocationName");
       final response = await _dio.post('/bc/upload-diagnosis-report', data: {
         "key": "3453454343",
         "subject_id": barcode,
@@ -245,7 +263,8 @@ class APIService {
         "date": date,
         "time": time,
         "location": location,
-        "diagnosis": diagnosis
+        "diagnosis": diagnosis,
+        "patientId": patientId
       });
       return API.fromJson(response.data);
     } catch (error) {
@@ -366,7 +385,8 @@ class APIService {
           .get('/appointment/location-appointments?locationid=' + location);
       if (response.statusCode == 200) {
         for (var appointment in response.data["data"]) {
-          _appointments.add(Schedule.fromJson(appointment));
+          if (appointment["s_id"] != null)
+            _appointments.add(Schedule.fromJson(appointment));
         }
       }
     } on Exception catch (e) {
@@ -446,54 +466,31 @@ class APIService {
   Future<Map<String, List<Slot>>> getAvailableSlots(
       String date, String location) async {
     Map<String, List<Slot>> result = Map();
-    List<Slot> _earlySlots = [], _lateSlots = [];
+    List<Slot> _earlySlots = [];
     try {
       final response = await _dio.get(
           '/appointment/check-slots?locationid=' + location + '&date=' + date);
       if (response.statusCode == 200) {
-        for (var _slot in response.data['earlySlots']) {
+        for (var _slot in response.data["data"]) {
           _earlySlots.add(Slot.fromJson(_slot));
-        }
-        for (var _slot in response.data['lateSlots']) {
-          _lateSlots.add(Slot.fromJson(_slot));
         }
       }
     } on Exception catch (e) {
       print(e);
     }
     result.putIfAbsent("earlySlots", () => _earlySlots);
-    result.putIfAbsent("lateSlots", () => _lateSlots);
-
     return result;
   }
 
-  Future<API> createLocation(
-      String location,
-      int interval,
-      String startTime,
-      String endTime,
-      String breakStartTime,
-      String breakEndTime,
-      double maxPerSlot) async {
+  Future<API> createLocation(Map<String, dynamic> payload) async {
     try {
-      String customerId = await SharedPreferencesHelper.getUserId();
-
-      final response = await _dio.post('/customer/location', data: {
-        'customerId': customerId,
-        'location': location,
-        "slot_config": {
-          "slot_time": interval,
-          "slot_daytime_start": startTime,
-          "slot_daytime_end": endTime,
-          "slot_break_start": breakStartTime,
-          "slot_break_end": breakEndTime,
-          "max_slots": maxPerSlot
-        }
-      });
+      final response = await _dio.post('/customer/location', data: payload);
+      print(response.data);
       return API.fromJson(response.data);
     } catch (error) {
+      print(error);
       Map map = Map<String, dynamic>.from(error.response?.data);
-      map.putIfAbsent("statusCode", () => 500);
+      //map.putIfAbsent("statusCode", () => 500);
       return API.fromJson(map);
     }
   }
@@ -509,8 +506,10 @@ class APIService {
     }
   }
 
-  Future<API> registerPatient({QRCode code, location = "Not Assigned"}) async {
+  Future<API> registerPatient(QRCode code) async {
     try {
+      String locationId =
+          await SharedPreferencesHelper.getString("DefaultTestLocationId");
       String location =
           await SharedPreferencesHelper.getString("DefaultTestLocationName");
       String staffId = await SharedPreferencesHelper.getUserId();
@@ -519,6 +518,7 @@ class APIService {
         "barcode": code.relationship,
         "timestamp": DateTime.now().toString(),
         "location": location != null ? location : "-",
+        "locationId": locationId,
         "staffId": staffId
       });
       return API.fromJson(response.data);
@@ -559,6 +559,47 @@ class APIService {
     } on Exception catch (e) {
       print(e);
       return [];
+    }
+  }
+
+  Future<List<Result>> patients() async {
+    try {
+      String locationId =
+          await SharedPreferencesHelper.getString("DefaultTestLocationId");
+      final response = await _dio.get('/bc/location?locationId=' + locationId);
+      List<Result> _results = [];
+      if (response.statusCode == 200) {
+        for (var _result in response.data) {
+          Convertor c = new Convertor();
+          dynamic json = jsonDecode(c.decrypt(_result["patientId"]));
+
+          var obj = Result.fromJson({
+            "id": json["id"],
+            "name": json["name"],
+            "nationality": json["nationality"],
+            "dob": json["dob"],
+            "diagnosis": _result["diagnosis"],
+            "subject_id": _result["code"]
+          });
+          _results.add(obj);
+        }
+      }
+      return _results;
+    } on Exception catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  Future<bool> checkOutPatient(String patientId, String barcode) async {
+    try {
+      final response = await _dio.post('/bc/checkout',
+          data: {"patientId": patientId, "barcode": barcode});
+      print(response);
+      return true;
+    } on Exception catch (e) {
+      print(e);
+      return false;
     }
   }
 }

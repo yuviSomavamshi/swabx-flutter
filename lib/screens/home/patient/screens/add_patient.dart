@@ -28,7 +28,7 @@ class RegisterPatient extends StatelessWidget {
                       child: Column(
                     children: [
                       SizedBox(height: 20),
-                      Text("Patient Registration",
+                      Text("User Registration",
                           style: TextStyle(
                               fontSize: getProportionateScreenWidth(20),
                               color: kPrimaryColor,
@@ -55,6 +55,16 @@ class _PatientRegFormState extends State<PatientRegForm> {
   String relationship = "Self";
   bool confirmation = false;
   DateFormat _dateFormat = DateFormat('dd-MM-yyyy');
+
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferencesHelper.getUserName().then((value) {
+      setState(() {
+        name = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,8 +139,7 @@ class _PatientRegFormState extends State<PatientRegForm> {
                           confirmation: confirmation,
                           created: DateTime.now().toString()));
                   if (status == "Registered") {
-                    Toast.show(
-                        "Successfully Registered Patient details.", context,
+                    Toast.show("Successfully Registered User details.", context,
                         duration: kToastDuration, gravity: Toast.BOTTOM);
                     Navigator.push(
                         context,
@@ -180,7 +189,10 @@ class _PatientRegFormState extends State<PatientRegForm> {
   }
 
   TextFormField buildNameFormField() {
+    TextEditingController intialValue = TextEditingController();
+    intialValue.text = name;
     return TextFormField(
+      controller: intialValue,
       maxLength: 25,
       onSaved: (newValue) => name = newValue,
       onChanged: (value) {

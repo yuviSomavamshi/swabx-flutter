@@ -98,11 +98,20 @@ class _ChangeLocationState extends State<ChangeLocation> {
                     "DefaultTestLocationId", _location);
                 await SharedPreferencesHelper.setString(
                     "DefaultTestLocationName", selected.location);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => StaffHomeScreen(nextScreen: 2),
-                    ));
+                String role = await SharedPreferencesHelper.getUserRole();
+                if (role == "Staff") {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StaffHomeScreen(nextScreen: 2),
+                      ));
+                } else if (role == "Patient") {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PatientHomeScreen(nextScreen: 2),
+                      ));
+                }
               }
             },
           ),

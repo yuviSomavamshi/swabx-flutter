@@ -118,7 +118,7 @@ class _ResetPassFormState extends State<ResetPassForm> {
           SizedBox(height: getProportionateScreenHeight(15)),
           Text("Secure Password Tips:"),
           Text(
-              "Use at least 8 characters, a combination of numbers, special characters and letters\n\t\t* at least one lowercase letter.\n\t\t* at least one uppercase letter.\n\t\t* at least one number.\n\t\t* at least one of the special character !@#\$%^&\n\t",
+              "Use at least 8 characters, a combination of numbers, special characters and letters\n\t\t* at least one lowercase letter.\n\t\t* at least one uppercase letter.\n\t\t* at least one number.\n\t\t* at least one of the special characters !@#\$%^&\n\t",
               textAlign: TextAlign.left,
               style: Theme.of(context).textTheme.caption)
         ],

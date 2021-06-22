@@ -241,19 +241,6 @@ class LocationQRCodeCard extends StatelessWidget {
                     maxLines: 2,
                   )
                 ],
-              ),
-              Spacer(),
-              Row(
-                children: [
-                  // ignore: deprecated_member_use
-                  FlatButton(
-                      onPressed: () {
-                        showAlertDialog(context);
-                      },
-                      minWidth: 10,
-                      padding: EdgeInsets.all(0.0),
-                      child: getTrashIcon()),
-                ],
               )
             ],
           ),

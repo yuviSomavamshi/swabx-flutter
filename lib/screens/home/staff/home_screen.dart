@@ -1,12 +1,16 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:swabx/constants.dart';
 import 'package:swabx/helper/APIService.dart';
 import 'package:swabx/helper/SharedPreferencesHelper.dart';
 import 'package:swabx/models/QRCode.dart';
+import 'package:swabx/screens/default_test_location/default_test_location_screen.dart';
 import 'package:swabx/screens/home/custom_app_bar.dart';
 import 'package:swabx/screens/home/home_screen.dart';
 import 'package:swabx/screens/home/staff/register/patient_qr_scanner.dart';
 import 'package:swabx/size_config.dart';
+import 'package:toast/toast.dart';
 
 APIService apiService = new APIService();
 
@@ -43,8 +47,19 @@ class _StaffDashboardScreenState extends State<StaffDashboardScreen> {
           ],
         ),
         floatingActionButton: new FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, ScanPatientQRCode.routeName);
+          onPressed: () async {
+            String locationId = await SharedPreferencesHelper.getString(
+                "DefaultTestLocationId");
+
+            if (locationId == null || locationId == "-1") {
+              Toast.show("Please select the Default Test Location", context,
+                  duration: kToastDuration, gravity: Toast.BOTTOM);
+              Timer(Duration(seconds: kToastDuration), () {
+                Navigator.pushNamed(context, DefaultTestLocation.routeName);
+              });
+            } else {
+              Navigator.pushNamed(context, ScanPatientQRCode.routeName);
+            }
           },
           child: Icon(
             Icons.qr_code_scanner_sharp,
@@ -52,7 +67,7 @@ class _StaffDashboardScreenState extends State<StaffDashboardScreen> {
             size: 29,
           ),
           backgroundColor: kPrimaryColor,
-          tooltip: 'Scan patient QR and device barcode',
+          tooltip: 'Scan User QR and device barcode',
           elevation: 5,
           splashColor: Colors.grey,
         ));
@@ -103,7 +118,8 @@ class _MyGrid extends StatelessWidget {
               children: <Widget>[
                 SizedBox(height: 10),
                 Image.asset('assets/images/' + image + '.png',
-                    height: 80, width: 80),
+                    height: getProportionateScreenHeight(50),
+                    width: getProportionateScreenWidth(50)),
                 Text(title,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,

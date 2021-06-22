@@ -48,13 +48,13 @@ class _SignUpFormState extends State<SignUpForm> {
       child: Column(
         children: [
           buildFirstNameFormField(),
-          SizedBox(height: getProportionateScreenHeight(10)),
+          SizedBox(height: getProportionateScreenHeight(15)),
           buildEmailFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(15)),
           buildPasswordFormField(),
-          SizedBox(height: getProportionateScreenHeight(5)),
+          SizedBox(height: getProportionateScreenHeight(15)),
           buildConfirmPassFormField(),
-          SizedBox(height: getProportionateScreenHeight(5)),
+          SizedBox(height: getProportionateScreenHeight(15)),
           DefaultButton(
             text: "Continue",
             press: () {
@@ -158,6 +158,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      maxLength: 255,
       keyboardType: TextInputType.emailAddress,
       onSaved: (newValue) => email = newValue,
       onChanged: (value) {

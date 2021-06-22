@@ -134,7 +134,7 @@ class _ScanDeviceBarcodeFormState extends State<ScanDeviceBarcodeForm> {
                                       confirmation: true,
                                       relationship: barcode);
                                   apiService
-                                      .registerPatient(code: code)
+                                      .registerPatient(code)
                                       .then((value) {
                                     if (value.statusCode == 409) {
                                       Toast.show(

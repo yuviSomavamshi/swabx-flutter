@@ -1,4 +1,6 @@
-import 'package:swabx/screens/home/patient/home_screen.dart';
+import 'dart:async';
+
+import 'package:swabx/screens/default_test_location/default_test_location_screen.dart';
 import 'package:toast/toast.dart';
 import 'package:swabx/constants.dart';
 import 'package:swabx/helper/APIService.dart';
@@ -11,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:poller/poller.dart';
 
 import '../home_screen.dart';
+
+APIService apiService = new APIService();
 
 extension StringExtensions on String {
   bool containsIgnoreCase(String secondString) =>
@@ -34,7 +38,7 @@ class _RecentScansState extends State<RecentScans> {
     super.initState();
     _search = "";
     _searchPressed = false;
-    SharedPreferencesHelper.getResults().then((r) {
+    apiService.patients().then((r) {
       this.setState(() {
         results = r;
       });
@@ -43,27 +47,11 @@ class _RecentScansState extends State<RecentScans> {
       _poller = new Poller(
           seconds: 10,
           callback: () async {
-            APIService apiService = new APIService();
-            for (var i = 0; i < results.length; i++) {
-              var p = results[i];
-              if (p.result == "Pending") {
-                apiService.patientReport(p.getHash()).then((result) {
-                  try {
-                    var r = result.firstWhere((e) => e.barcode == p.barcode,
-                        orElse: () => null);
-                    if (r != null) {
-                      p.result = r.result;
-                      setState(() {
-                        results[i] = p;
-                      });
-                      SharedPreferencesHelper.persistResults(results);
-                    }
-                  } on Exception catch (e) {
-                    print(e);
-                  }
-                });
-              }
-            }
+            apiService.patients().then((r) {
+              this.setState(() {
+                results = r;
+              });
+            });
           },
           logging: false);
       _poller.start();
@@ -104,8 +92,19 @@ class _RecentScansState extends State<RecentScans> {
                   ])))
             ]),
         floatingActionButton: new FloatingActionButton(
-          onPressed: () {
-            Navigator.pushNamed(context, ScanPatientQRCode.routeName);
+          onPressed: () async {
+            String locationId = await SharedPreferencesHelper.getString(
+                "DefaultTestLocationId");
+
+            if (locationId == null || locationId == "-1") {
+              Toast.show("Please select the Default Test Location", context,
+                  duration: kToastDuration, gravity: Toast.BOTTOM);
+              Timer(Duration(seconds: kToastDuration), () {
+                Navigator.pushNamed(context, DefaultTestLocation.routeName);
+              });
+            } else {
+              Navigator.pushNamed(context, ScanPatientQRCode.routeName);
+            }
           },
           child: Icon(
             Icons.qr_code_scanner_sharp,
@@ -113,7 +112,7 @@ class _RecentScansState extends State<RecentScans> {
             size: 29,
           ),
           backgroundColor: kPrimaryColor,
-          tooltip: 'Scan patient QR and device barcode',
+          tooltip: 'Scan User QR and device barcode',
           elevation: 5,
           splashColor: Colors.grey,
         ));
@@ -175,7 +174,6 @@ class _RecentScansState extends State<RecentScans> {
                     confirmDismiss: (direction) async {
                       if (direction == DismissDirection.endToStart) {
                         if (filtered[index].result == "Pending") {
-                          print(filtered[index].getHash());
                           Toast.show("You cannot delete this record", context,
                               duration: kToastDuration, gravity: Toast.BOTTOM);
                           return null;
@@ -205,6 +203,11 @@ class _RecentScansState extends State<RecentScans> {
                                         style: TextStyle(color: Colors.red),
                                       ),
                                       onPressed: () {
+                                        apiService
+                                            .checkOutPatient(
+                                                filtered[index].getHash(),
+                                                filtered[index].barcode)
+                                            .then((value) => print);
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -237,7 +240,7 @@ class _RecentScansState extends State<RecentScans> {
                   );
                 },
               )
-            : noRecords("No Appointment Scheduled"));
+            : noRecords("No Records Found"));
   }
 
   Future<List<Result>> downloadData() async {
@@ -277,13 +280,14 @@ class ReportCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50)),
                     onPressed: () {
                       DateTime now = DateTime.now();
+                      now = now.toUtc().add(Duration(hours: 8));
                       apiService
                           .uploadDiagnosisReport(
                               barcode: report.barcode,
                               date: dateFormat.format(now),
                               time: timeFormat.format(now),
-                              location: report.location,
-                              diagnosis: "Negative")
+                              diagnosis: "Negative",
+                              patientId: report.getHash())
                           .then((value) {
                         Toast.show(value.message, context,
                             duration: kToastDuration, gravity: Toast.BOTTOM);
@@ -305,13 +309,14 @@ class ReportCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50)),
                     onPressed: () {
                       DateTime now = DateTime.now();
+                      now = now.toUtc().add(Duration(hours: 8));
                       apiService
                           .uploadDiagnosisReport(
                               barcode: report.barcode,
                               date: dateFormat.format(now),
                               time: timeFormat.format(now),
-                              location: report.location,
-                              diagnosis: "Positive")
+                              diagnosis: "Positive",
+                              patientId: report.getHash())
                           .then((value) {
                         Toast.show(value.message, context,
                             duration: kToastDuration, gravity: Toast.BOTTOM);
@@ -333,13 +338,14 @@ class ReportCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(50)),
                     onPressed: () {
                       DateTime now = DateTime.now();
+                      now = now.toUtc().add(Duration(hours: 8));
                       apiService
                           .uploadDiagnosisReport(
                               barcode: report.barcode,
                               date: dateFormat.format(now),
                               time: timeFormat.format(now),
-                              location: report.location,
-                              diagnosis: "Invalid")
+                              diagnosis: "Invalid",
+                              patientId: report.getHash())
                           .then((value) {
                         Toast.show(value.message, context,
                             duration: kToastDuration, gravity: Toast.BOTTOM);
@@ -373,10 +379,7 @@ class ReportCard extends StatelessWidget {
 
     return GestureDetector(
         onTap: () {
-          if (report.result == "Pending") {
-            print("Tap");
-            _showConfirmation(context);
-          }
+          _showConfirmation(context);
         },
         child: Card(
           child: Column(

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:swabx/components/default_button.dart';
 import 'package:swabx/helper/APIService.dart';
 import 'package:swabx/helper/SharedPreferencesHelper.dart';
-import 'package:swabx/models/Location.dart';
 import 'package:swabx/models/QRCode.dart';
 import 'package:swabx/models/Slot.dart';
 import 'package:swabx/screens/home/custom_app_bar.dart';
@@ -15,7 +14,6 @@ import 'package:swabx/screens/home/patient/screens/add_patient.dart';
 import 'package:swabx/size_config.dart';
 import 'package:intl/intl.dart';
 import 'package:toast/toast.dart';
-import 'location_dropdown.dart';
 
 APIService apiService = new APIService();
 
@@ -61,11 +59,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
   DateTime _selectedDate;
   String _location = "-1";
   String _locationName = "";
-  List<Location> _locations = [
-    Location.fromJson({"id": "-1", "location": "Select"})
-  ];
   List<Slot> _earlySlots = [];
-  List<Slot> _lateSlots = [];
 
   @override
   void initState() {
@@ -73,52 +67,44 @@ class _AppointmentTimeState extends State<AppointmentTime> {
     this.setState(() {
       _selectedDate = DateTime.now();
     });
-    _getLocations();
+
+    downloadData();
   }
 
-  void _getLocations() {
-    apiService.getAllLocations().then((value) {
+  Future<String> downloadData() async {
+    _location =
+        await SharedPreferencesHelper.getString("DefaultTestLocationId");
+    _locationName =
+        await SharedPreferencesHelper.getString("DefaultTestLocationName");
+    apiService
+        .getAvailableSlots(_dateFormatYMD.format(_selectedDate), _location)
+        .then((value) {
       setState(() {
-        _locations = value;
+        _earlySlots = value["earlySlots"];
       });
     });
+    return Future.value(""); // return your response
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 2),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           if (_selectedDate != null)
             Text(_dateFormat.format(_selectedDate),
                 style: TextStyle(fontSize: 18, color: Colors.black)),
           SizedBox(height: 20),
           _buildDatePicker(),
-          LocationDropDown(
-              locations: _locations,
-              location: _location,
-              onChanged: (String loc) {
-                this.setState(() {
-                  _location = loc;
-                  _locationName = _locations
-                      .firstWhere((element) => element.id == loc)
-                      .location;
-                });
-
-                if (_location != "-1")
-                  apiService
-                      .getAvailableSlots(
-                          _dateFormatYMD.format(_selectedDate), loc)
-                      .then((value) {
-                    print(value);
-                    setState(() {
-                      _earlySlots = value["earlySlots"];
-                      _lateSlots = value["lateSlots"];
-                    });
-                  });
-              }),
+          SizedBox(height: 10),
+          Text("Available Slots: " + _locationName,
+              style: TextStyle(
+                  fontSize: getProportionateScreenHeight(18),
+                  color: Colors.black)),
           if (_location != "-1" && _earlySlots.length > 0)
-            _buildSlotsCard(_earlySlots, _lateSlots)
+            _buildSlotsCard(_earlySlots)
+          else
+            noRecords("No Slots Available")
         ]));
   }
 
@@ -285,23 +271,11 @@ class _AppointmentTimeState extends State<AppointmentTime> {
     );
   }
 
-  Widget _buildSlotsCard(List<Slot> earlySlots, List<Slot> lateSlots) {
+  Widget _buildSlotsCard(List<Slot> earlySlots) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       SizedBox(height: 10),
-      Text("Available Slots",
-          style: TextStyle(fontSize: 18, color: Colors.black)),
-      SizedBox(height: 10),
-      if (earlySlots.length > 0)
-        Text("\t\tEarly Slots",
-            style: TextStyle(fontSize: 14, color: Colors.black)),
       if (earlySlots.length > 0) SizedBox(height: 10),
-      ...earlySlots.map((e) => _buildCard(e)).toList(),
-      if (lateSlots.length > 0) SizedBox(height: 10),
-      if (lateSlots.length > 0)
-        Text("\t\tLate Slots",
-            style: TextStyle(fontSize: 14, color: Colors.black)),
-      SizedBox(height: 10),
-      ...lateSlots.map((e) => _buildCard(e)).toList()
+      ...earlySlots.map((e) => _buildCard(e)).toList()
     ]);
   }
 
@@ -312,6 +286,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
         selectedTextColor: Colors.white, onDateChange: (dt) {
       this.setState(() {
         _selectedDate = dt;
+        _earlySlots = [];
       });
       if (_location != "-1")
         apiService
@@ -320,7 +295,6 @@ class _AppointmentTimeState extends State<AppointmentTime> {
           print(value);
           setState(() {
             _earlySlots = value["earlySlots"];
-            _lateSlots = value["lateSlots"];
           });
         });
     }, height: 85);

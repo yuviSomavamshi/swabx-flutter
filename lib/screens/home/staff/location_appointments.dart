@@ -198,7 +198,7 @@ class AppointmentCard extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           insetPadding: EdgeInsets.symmetric(horizontal: 30),
-          title: Center(child: Text("Patient Details")),
+          title: Center(child: Text("User Details")),
           content: Container(
             height: 120.0,
             child: Column(

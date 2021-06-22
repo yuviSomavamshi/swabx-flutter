@@ -23,14 +23,14 @@ class Body extends StatelessWidget {
               Text("Change Password", style: headingStyle),
               SizedBox(height: SizeConfig.screenHeight * 0.01),
               Text(
-                "Please enter strong password",
+                "Please enter a strong password",
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: SizeConfig.screenHeight * 0.02),
               ChangePassForm(),
               Text("Secure Password Tips:"),
               Text(
-                  "Use at least 8 characters, a combination of numbers, special characters and letters\n\t\t* at least one lowercase letter.\n\t\t* at least one uppercase letter.\n\t\t* at least one number.\n\t\t* at least one of the special character !@#\$%^&\n\t",
+                  "Use at least 8 characters, a combination of numbers, special characters and letters\n\t\t* at least one lowercase letter.\n\t\t* at least one uppercase letter.\n\t\t* at least one number.\n\t\t* at least one of the special characters !@#\$%^&\n\t",
                   textAlign: TextAlign.left,
                   style: Theme.of(context).textTheme.caption)
             ],
@@ -147,21 +147,20 @@ class _ChangePassFormState extends State<ChangePassForm> {
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Confirm Password",
-        hintText: "Re-enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.auto,
-        suffixIcon: IconButton(
-          icon: Icon(
-            // Based on passwordVisible state choose the icon
-            _obscureConfirmText ? Icons.visibility : Icons.visibility_off,
-            color: Colors.grey,
-          ),
-          onPressed: _toggleConfirmField,
-          padding: EdgeInsets.only(right: 20),
-        ),
-      ),
+          labelText: "Confirm Password",
+          hintText: "Re-enter your new password",
+          // If  you are using latest version of flutter then lable text and hint text shown like this
+          // if you r using flutter less then 1.20.* then maybe this is not working properly
+          floatingLabelBehavior: FloatingLabelBehavior.auto,
+          suffixIcon: IconButton(
+            icon: Icon(
+              // Based on passwordVisible state choose the icon
+              _obscureConfirmText ? Icons.visibility : Icons.visibility_off,
+              color: Colors.grey,
+            ),
+            onPressed: _toggleConfirmField,
+            padding: EdgeInsets.only(right: 20),
+          )),
     );
   }
 
@@ -179,8 +178,8 @@ class _ChangePassFormState extends State<ChangePassForm> {
         return validatePassword(value);
       },
       decoration: InputDecoration(
-        labelText: "Password",
-        hintText: "Enter your password",
+        labelText: "New Password",
+        hintText: "Enter your new password",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.auto,
