@@ -163,7 +163,8 @@ SliverPadding buildStatsHeader(String title) {
   );
 }
 
-SliverPadding buildStatsTabBar(Function(String value) onChanged) {
+SliverPadding buildStatsTabBar(
+    Function(String startDate, String endDate) onChanged) {
   return SliverPadding(
     padding: const EdgeInsets.only(left: 20, right: 20, bottom: 5),
     sliver: SliverToBoxAdapter(
@@ -196,21 +197,24 @@ SliverPadding buildStatsTabBar(Function(String value) onChanged) {
           ],
           onTap: (index) {
             final now = DateTime.now();
-            String reportDate;
+            String startDate, endDate;
             switch (index) {
               case 0:
-                reportDate = dateFormat.format(now);
+                startDate = dateFormat.format(now);
+                endDate = startDate;
                 break;
               case 1:
                 final yesterday = DateTime(now.year, now.month, now.day - 1);
-                reportDate = dateFormat.format(yesterday);
+                startDate = dateFormat.format(yesterday);
+                endDate = startDate;
                 break;
               case 2:
                 final lastWeek = DateTime(now.year, now.month, now.day - 7);
-                reportDate = dateFormat.format(lastWeek);
+                startDate = dateFormat.format(lastWeek);
+                endDate = dateFormat.format(now);
                 break;
             }
-            onChanged(reportDate);
+            onChanged(startDate, endDate);
           },
         ),
       ),
