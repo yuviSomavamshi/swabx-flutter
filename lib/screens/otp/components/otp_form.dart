@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:swabx/helper/SharedPreferencesHelper.dart';
 import 'package:swabx/models/API.dart';
 import 'package:flutter/material.dart';
@@ -161,13 +163,15 @@ class _OtpFormState extends State<OtpForm> {
               if (value != null &&
                   value.message != null &&
                   value.message.isNotEmpty) {
+                Toast.show(value.message, context,
+                    duration: kToastDuration, gravity: Toast.BOTTOM);
+
                 if (value.statusCode == 200) {
                   SharedPreferencesHelper.setToken(token);
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, nextScreen, (route) => false);
-                } else {
-                  Toast.show(value.message, context,
-                      duration: kToastDuration, gravity: Toast.BOTTOM);
+                  Timer(Duration(seconds: 3), () async {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, nextScreen, (route) => false);
+                  });
                 }
               }
             },

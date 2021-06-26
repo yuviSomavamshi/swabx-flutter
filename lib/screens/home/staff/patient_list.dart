@@ -45,7 +45,7 @@ class _RecentScansState extends State<RecentScans> {
     });
     if (_poller == null) {
       _poller = new Poller(
-          seconds: 10,
+          seconds: 5,
           callback: () async {
             apiService.patients().then((r) {
               this.setState(() {
