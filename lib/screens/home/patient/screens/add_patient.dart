@@ -9,7 +9,6 @@ import 'package:swabx/components/default_button.dart';
 import 'package:swabx/constants.dart';
 import 'package:swabx/size_config.dart';
 import 'package:toast/toast.dart';
-import 'package:intl/intl.dart';
 
 class RegisterPatient extends StatelessWidget {
   static String routeName = "/registerPatient";
