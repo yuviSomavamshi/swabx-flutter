@@ -26,7 +26,7 @@ class RegisterStaff extends StatelessWidget {
             slivers: <Widget>[
               buildHeader(screenHeight),
               SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   sliver: SliverToBoxAdapter(
                       child: Column(
                     children: [
@@ -78,7 +78,7 @@ class _StaffRegFormState extends State<StaffRegForm> {
       key: _formKey,
       child: Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
         child: Column(
           children: [
             buildFirstNameFormField(),

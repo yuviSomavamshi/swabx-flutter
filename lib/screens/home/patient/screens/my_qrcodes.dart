@@ -45,13 +45,13 @@ class _MyRegisteredQrCodesState extends State<MyRegisteredQrCodes> {
     if (qrCodes != null && qrCodes.length > 0) {
       screen = Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
         child: PatientList(qrCodes: qrCodes),
       );
     } else {
       screen = Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
           child: Column(
             children: [
               SizedBox(
@@ -79,7 +79,7 @@ class _MyRegisteredQrCodesState extends State<MyRegisteredQrCodes> {
             slivers: <Widget>[
               buildPatientHeader(screenHeight, myCode, context),
               SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   sliver: SliverToBoxAdapter(child: screen))
             ]),
         floatingActionButton: (qrCodes != null && qrCodes.length > 0)
@@ -300,7 +300,7 @@ class ResultScreen extends StatelessWidget {
                         buildHeader(screenHeight),
                         SliverPadding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
+                                const EdgeInsets.symmetric(horizontal: 5.0),
                             sliver: SliverToBoxAdapter(
                                 child: RegisteredPatientsList(
                                     patient: patient, items: snapshot.data)))

@@ -22,7 +22,7 @@ class RegisterPatient extends StatelessWidget {
             slivers: <Widget>[
               buildHeader(screenHeight),
               SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   sliver: SliverToBoxAdapter(
                       child: Column(
                     children: [
@@ -70,7 +70,7 @@ class _PatientRegFormState extends State<PatientRegForm> {
       key: _formKey,
       child: Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
         child: Column(
           children: [
             buildPassportFormField(),

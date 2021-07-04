@@ -45,7 +45,7 @@ class _MyStaffListState extends State<MyStaffList> {
                   slivers: <Widget>[
                     buildHeader(screenHeight),
                     SliverPadding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         sliver: SliverToBoxAdapter(
                             child: (snapshot.data.length > 0)
                                 ? Padding(

@@ -21,7 +21,7 @@ class Body extends StatelessWidget {
       width: double.infinity,
       child: Padding(
         padding:
-            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+            EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
         child: SingleChildScrollView(
           child: Column(
             children: [

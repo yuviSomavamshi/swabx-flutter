@@ -76,7 +76,7 @@ class _RecentScansState extends State<RecentScans> {
             slivers: <Widget>[
               buildHeader(screenHeight),
               SliverPadding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   sliver: SliverToBoxAdapter(
                       child: Column(children: [
                     SizedBox(height: 20),

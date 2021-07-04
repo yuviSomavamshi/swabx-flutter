@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
           child: Column(
             children: [
               Image.asset(

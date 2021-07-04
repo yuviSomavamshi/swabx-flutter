@@ -233,7 +233,7 @@ class StatsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 5.0),
         sliver: SliverToBoxAdapter(
             child: Container(
           height: MediaQuery.of(context).size.height * 0.11,

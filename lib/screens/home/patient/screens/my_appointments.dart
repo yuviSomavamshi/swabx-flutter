@@ -49,7 +49,7 @@ class _MyAppointmentsState extends State<MyAppointments> {
                   slivers: <Widget>[
                     buildHeader(screenHeight),
                     SliverPadding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         sliver: SliverToBoxAdapter(
                             child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10),
