@@ -93,7 +93,7 @@ class _MyGrid extends StatelessWidget {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(5.0),
         decoration: BoxDecoration(
             color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(10.0)),
@@ -105,7 +105,6 @@ class _MyGrid extends StatelessWidget {
               } else {
                 String locationId = await SharedPreferencesHelper.getString(
                     "DefaultTestLocationId");
-
                 if (locationId == null || locationId == "-1") {
                   Toast.show("Please select the Default Test Location", context,
                       duration: kToastDuration, gravity: Toast.BOTTOM);
@@ -122,8 +121,8 @@ class _MyGrid extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Image.asset('assets/images/' + image + '.png',
-                    height: getProportionateScreenHeight(50),
-                    width: getProportionateScreenWidth(50)),
+                    height: getProportionateScreenHeight(40),
+                    width: getProportionateScreenWidth(40)),
                 Text(title,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -180,7 +179,7 @@ class _MyUpcomingAppointment extends StatelessWidget {
                 AppointmentCard(appointment: appointment)
               else
                 Padding(
-                    padding: EdgeInsets.all(40),
+                    padding: EdgeInsets.all(20),
                     child: Text("No Scheduled Appointment",
                         style: TextStyle(color: Colors.black)))
             ],

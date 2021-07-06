@@ -127,7 +127,7 @@ class AppointmentCard extends StatelessWidget {
                   // ignore: deprecated_member_use
                   FlatButton(
                       onPressed: () => null,
-                      minWidth: 40,
+                      minWidth: getProportionateScreenWidth(40),
                       padding: EdgeInsets.all(0.0),
                       child: Image.asset(
                           'assets/images/appointment_confirmation.png',

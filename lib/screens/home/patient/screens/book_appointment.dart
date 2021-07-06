@@ -321,7 +321,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
           children: [
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: disable ? Colors.grey : Colors.white,
                 border: Border.all(color: Color(0XFFDADADA), width: 2),
@@ -332,15 +332,16 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                   // ignore: deprecated_member_use
                   FlatButton(
                       onPressed: () => null,
-                      minWidth: 40,
+                      minWidth: getProportionateScreenWidth(40),
                       padding: EdgeInsets.all(0.0),
                       child: Image.asset('assets/images/appointment.png',
-                          width: 45, height: 45)),
+                          width: getProportionateScreenWidth(40),
+                          height: getProportionateScreenHeight(40))),
                   SizedBox(
                     width: 10,
                   ),
                   Container(
-                      width: getProportionateScreenWidth(200),
+                      width: getProportionateScreenWidth(170),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -368,7 +369,8 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                           minWidth: 10,
                           padding: EdgeInsets.all(0.0),
                           child: Image.asset('assets/images/next.png',
-                              width: 40, height: 40))
+                              width: getProportionateScreenWidth(40),
+                              height: getProportionateScreenHeight(40)))
                     ],
                   )
                 ],

@@ -285,10 +285,11 @@ class PatientSummaryCard extends StatelessWidget {
                   // ignore: deprecated_member_use
                   FlatButton(
                       onPressed: () => null,
-                      minWidth: 40,
+                      minWidth: getProportionateScreenWidth(40),
                       padding: EdgeInsets.all(10),
                       child: Image.asset('assets/images/qrcode.png',
-                          width: 45, height: 45))
+                          width: getProportionateScreenWidth(40),
+                          height: getProportionateScreenHeight(40)))
                 ],
               ),
             ),
@@ -371,7 +372,7 @@ class BarcodeSummaryCard extends StatelessWidget {
                       // ignore: deprecated_member_use
                       FlatButton(
                           onPressed: () => null,
-                          minWidth: 40,
+                          minWidth: getProportionateScreenWidth(40),
                           child: Image.asset('assets/images/barcode.png',
                               width: 45)),
                       // ignore: deprecated_member_use

@@ -182,10 +182,11 @@ class StaffCard extends StatelessWidget {
               // ignore: deprecated_member_use
               FlatButton(
                   onPressed: () => null,
-                  minWidth: 40,
+                  minWidth: getProportionateScreenWidth(40),
                   padding: EdgeInsets.all(0.0),
                   child: SvgPicture.asset('assets/images/staff_member.svg',
-                      width: 45, height: 45)),
+                      width: getProportionateScreenWidth(40),
+                      height: getProportionateScreenHeight(40))),
               SizedBox(
                 width: 10,
               ),

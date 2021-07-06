@@ -156,7 +156,7 @@ class AppointmentCard extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-              padding: EdgeInsets.all(15),
+              padding: EdgeInsets.all(5),
               decoration: BoxDecoration(
                 border: Border.all(color: Color(0XFFDADADA), width: 2),
                 borderRadius: BorderRadius.circular(10),
@@ -166,45 +166,46 @@ class AppointmentCard extends StatelessWidget {
                   // ignore: deprecated_member_use
                   FlatButton(
                       onPressed: () => null,
-                      minWidth: 40,
+                      minWidth: getProportionateScreenWidth(40),
                       padding: EdgeInsets.all(0.0),
                       child: Image.asset(
                           'assets/images/appointment_confirmation.png',
-                          width: 45,
-                          height: 45)),
+                          width: getProportionateScreenWidth(40),
+                          height: getProportionateScreenHeight(40))),
                   SizedBox(
                     width: 10,
                   ),
                   Container(
+                      width: getProportionateScreenWidth(150),
                       child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(appointment.location,
-                          overflow: TextOverflow.clip,
-                          maxLines: 1,
-                          softWrap: false,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: getProportionateScreenWidth(16))),
-                      Text(
-                        appointment.date,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            color: Color(0XFF8C92A4),
-                            fontSize: getProportionateScreenWidth(14)),
-                        maxLines: 2,
-                      ),
-                      Text(
-                        appointment.time,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            color: Color(0XFF8C92A4),
-                            fontSize: getProportionateScreenWidth(14)),
-                        maxLines: 2,
-                      )
-                    ],
-                  )),
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(appointment.location,
+                              overflow: TextOverflow.clip,
+                              maxLines: 1,
+                              softWrap: false,
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: getProportionateScreenWidth(16))),
+                          Text(
+                            appointment.date,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                color: Color(0XFF8C92A4),
+                                fontSize: getProportionateScreenWidth(14)),
+                            maxLines: 2,
+                          ),
+                          Text(
+                            appointment.time,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                color: Color(0XFF8C92A4),
+                                fontSize: getProportionateScreenWidth(14)),
+                            maxLines: 2,
+                          )
+                        ],
+                      )),
                   Spacer(),
                   // ignore: deprecated_member_use
                   FlatButton(
@@ -225,7 +226,6 @@ class AppointmentCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 15),
           ],
         ));
   }

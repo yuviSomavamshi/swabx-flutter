@@ -214,10 +214,11 @@ class LocationQRCodeCard extends StatelessWidget {
               // ignore: deprecated_member_use
               FlatButton(
                   onPressed: () => showQRCodeDialog(context, loc.location, qr),
-                  minWidth: 40,
+                  minWidth: getProportionateScreenWidth(40),
                   padding: EdgeInsets.all(0.0),
                   child: Image.asset('assets/images/qrcode.png',
-                      width: 45, height: 45)),
+                      width: getProportionateScreenWidth(40),
+                      height: getProportionateScreenHeight(40))),
               SizedBox(
                 width: 10,
               ),

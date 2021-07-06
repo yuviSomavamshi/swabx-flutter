@@ -210,10 +210,11 @@ class PatientCard extends StatelessWidget {
                 FlatButton(
                     onPressed: () => showQRCodeDialog(
                         context, qrCode.name, qrCode.getHash()),
-                    minWidth: 40,
+                    minWidth: getProportionateScreenWidth(40),
                     padding: EdgeInsets.all(0.0),
                     child: Image.asset('assets/images/qrcode.png',
-                        width: 45, height: 45)),
+                        width: getProportionateScreenWidth(40),
+                        height: getProportionateScreenHeight(40))),
                 SizedBox(
                   width: 15,
                 ),

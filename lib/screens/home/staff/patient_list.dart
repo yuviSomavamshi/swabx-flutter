@@ -157,8 +157,6 @@ class _RecentScansState extends State<RecentScans> {
     List<Result> filtered = [];
     if (results != null)
       results.forEach((element) {
-        print(_search + ":" + element.name);
-
         if (element.name.containsIgnoreCase(_search) ||
             element.id.containsIgnoreCase(_search) ||
             element.barcode.containsIgnoreCase(_search)) {
@@ -274,7 +272,7 @@ class ReportCard extends StatelessWidget {
                 SizedBox(height: 5),
                 // ignore: deprecated_member_use
                 FlatButton(
-                    height: 40,
+                    height: getProportionateScreenHeight(40),
                     minWidth: 100,
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
@@ -305,7 +303,7 @@ class ReportCard extends StatelessWidget {
                 SizedBox(height: 5),
                 // ignore: deprecated_member_use
                 FlatButton(
-                    height: 40,
+                    height: getProportionateScreenHeight(40),
                     minWidth: 100,
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
@@ -336,7 +334,7 @@ class ReportCard extends StatelessWidget {
                 SizedBox(height: 5),
                 // ignore: deprecated_member_use
                 FlatButton(
-                    height: 40,
+                    height: getProportionateScreenHeight(40),
                     minWidth: 100,
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(

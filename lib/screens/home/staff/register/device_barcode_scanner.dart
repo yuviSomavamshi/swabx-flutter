@@ -106,7 +106,6 @@ class _ScanDeviceBarcodeFormState extends State<ScanDeviceBarcodeForm> {
                           onPressed: barcode == null || barcode.isEmpty
                               ? null
                               : () async {
-                                  await controller?.stopCamera();
                                   await SharedPreferencesHelper.setString(
                                       "device_barcode", barcode);
 
@@ -263,10 +262,11 @@ class DetailsCard extends StatelessWidget {
                   // ignore: deprecated_member_use
                   FlatButton(
                       onPressed: () => null,
-                      minWidth: 40,
+                      minWidth: getProportionateScreenWidth(40),
                       padding: EdgeInsets.all(0.0),
                       child: SvgPicture.asset('assets/images/swabkit.svg',
-                          width: 45, height: 45)),
+                          width: getProportionateScreenWidth(40),
+                          height: getProportionateScreenHeight(40))),
                   SizedBox(
                     width: 5,
                   ),
