@@ -283,7 +283,7 @@ class DetailsCard extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: getProportionateScreenWidth(16),
                                   fontWeight: FontWeight.bold))
                         ],
                       )

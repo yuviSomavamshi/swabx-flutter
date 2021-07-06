@@ -148,17 +148,20 @@ class AppointmentCard extends StatelessWidget {
                             textAlign: TextAlign.left,
                             style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: getProportionateScreenWidth(16),
                                 fontWeight: FontWeight.bold)),
                       Text("Name: " + name,
                           overflow: TextOverflow.clip,
                           maxLines: 1,
                           softWrap: false,
                           textAlign: TextAlign.left,
-                          style: TextStyle(color: Colors.black, fontSize: 16)),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: getProportionateScreenWidth(16))),
                       Text(appointment.date + " " + appointment.time,
                           textAlign: TextAlign.left,
-                          style: TextStyle(fontSize: 14))
+                          style: TextStyle(
+                              fontSize: getProportionateScreenWidth(14)))
                     ],
                   )),
                   Spacer(),
@@ -175,7 +178,7 @@ class AppointmentCard extends StatelessWidget {
                         message,
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 12,
+                            fontSize: getProportionateScreenWidth(12),
                             fontWeight: FontWeight.bold),
                       ))
                 ],
@@ -218,7 +221,7 @@ class AppointmentCard extends StatelessWidget {
                         softWrap: false,
                         style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
+                            fontSize: getProportionateScreenWidth(16),
                             fontWeight: FontWeight.bold))
                   ],
                 ),
@@ -237,7 +240,7 @@ class AppointmentCard extends StatelessWidget {
                         softWrap: false,
                         style: TextStyle(
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: getProportionateScreenWidth(16),
                           fontWeight: FontWeight.bold,
                         ))
                   ],
@@ -255,7 +258,9 @@ class AppointmentCard extends StatelessWidget {
                         overflow: TextOverflow.clip,
                         maxLines: 1,
                         softWrap: false,
-                        style: TextStyle(color: Colors.black, fontSize: 16))
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(16)))
                   ],
                 ),
                 SizedBox(height: 10),
@@ -273,7 +278,9 @@ class AppointmentCard extends StatelessWidget {
                         overflow: TextOverflow.clip,
                         maxLines: 1,
                         softWrap: false,
-                        style: TextStyle(color: Colors.black, fontSize: 16))
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(16)))
                   ],
                 )
               ],

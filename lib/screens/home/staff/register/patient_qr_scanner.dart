@@ -251,7 +251,7 @@ class PatientDetailsCard extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: getProportionateScreenWidth(16),
                                   fontWeight: FontWeight.bold))
                         ],
                       ),
@@ -271,7 +271,7 @@ class PatientDetailsCard extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: getProportionateScreenWidth(16),
                                 fontWeight: FontWeight.bold,
                               ))
                         ],
@@ -290,8 +290,9 @@ class PatientDetailsCard extends StatelessWidget {
                               maxLines: 1,
                               softWrap: false,
                               textAlign: TextAlign.left,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16))
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: getProportionateScreenWidth(16)))
                         ],
                       ),
                       SizedBox(height: 5),
@@ -310,8 +311,9 @@ class PatientDetailsCard extends StatelessWidget {
                               maxLines: 1,
                               softWrap: false,
                               textAlign: TextAlign.left,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16))
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: getProportionateScreenWidth(16)))
                         ],
                       )
                     ],

@@ -93,13 +93,15 @@ class _AppointmentTimeState extends State<AppointmentTime> {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           if (_selectedDate != null)
             Text(_dateFormat.format(_selectedDate),
-                style: TextStyle(fontSize: 18, color: Colors.black)),
+                style: TextStyle(
+                    fontSize: getProportionateScreenWidth(18),
+                    color: Colors.black)),
           SizedBox(height: 20),
           _buildDatePicker(),
           SizedBox(height: 10),
           Text("Available Slots: " + _locationName,
               style: TextStyle(
-                  fontSize: getProportionateScreenHeight(18),
+                  fontSize: getProportionateScreenWidth(18),
                   color: Colors.black)),
           if (_location != "-1" && _earlySlots.length > 0)
             _buildSlotsCard(_earlySlots)
@@ -163,7 +165,9 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                   children: [
                     Text("Location",
                         textAlign: TextAlign.left,
-                        style: TextStyle(color: Colors.black, fontSize: 18)),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(18))),
                     Spacer(),
                     Text(_locationName,
                         overflow: TextOverflow.clip,
@@ -172,7 +176,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: kPrimaryColor,
-                            fontSize: 16,
+                            fontSize: getProportionateScreenWidth(16),
                             fontWeight: FontWeight.bold))
                   ],
                 ),
@@ -181,7 +185,9 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                   children: [
                     Text("Service Type",
                         textAlign: TextAlign.left,
-                        style: TextStyle(color: Colors.black, fontSize: 18)),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(18))),
                     Spacer(),
                     Text("Swab Test",
                         overflow: TextOverflow.clip,
@@ -190,7 +196,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: kPrimaryColor,
-                            fontSize: 16,
+                            fontSize: getProportionateScreenWidth(16),
                             fontWeight: FontWeight.bold))
                   ],
                 ),
@@ -199,7 +205,9 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                   children: [
                     Text("Date",
                         textAlign: TextAlign.left,
-                        style: TextStyle(color: Colors.black, fontSize: 18)),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(18))),
                     Spacer(),
                     Text(_dateFormat.format(_selectedDate),
                         overflow: TextOverflow.clip,
@@ -208,7 +216,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: kPrimaryColor,
-                            fontSize: 16,
+                            fontSize: getProportionateScreenWidth(16),
                             fontWeight: FontWeight.bold))
                   ],
                 ),
@@ -217,7 +225,9 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                   children: [
                     Text("Time",
                         textAlign: TextAlign.left,
-                        style: TextStyle(color: Colors.black, fontSize: 18)),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(18))),
                     Spacer(),
                     Text(slot.slotStart + " - " + slot.slotEnd,
                         overflow: TextOverflow.clip,
@@ -226,7 +236,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                             color: kPrimaryColor,
-                            fontSize: 16,
+                            fontSize: getProportionateScreenWidth(16),
                             fontWeight: FontWeight.bold))
                   ],
                 )
@@ -338,7 +348,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 16,
+                                  fontSize: getProportionateScreenWidth(16),
                                   fontWeight: FontWeight.bold)),
                           Text(slot.count.toString() + " slots",
                               textAlign: TextAlign.left,
@@ -346,7 +356,7 @@ class _AppointmentTimeState extends State<AppointmentTime> {
                                   color: slot.count > 0
                                       ? Colors.green
                                       : Colors.red,
-                                  fontSize: 16))
+                                  fontSize: getProportionateScreenWidth(16)))
                         ],
                       )),
                   Spacer(),

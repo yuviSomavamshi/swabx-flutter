@@ -311,7 +311,7 @@ class _LocationRegFormState extends State<LocationRegForm> {
                     }
                     return null;
                   },
-                  style: TextStyle(fontSize: getProportionateScreenHeight(15)),
+                  style: TextStyle(fontSize: getProportionateScreenWidth(15)),
                   decoration: InputDecoration(
                     labelText: 'Break Start Time',
                     suffixIcon: IconButton(
@@ -341,7 +341,7 @@ class _LocationRegFormState extends State<LocationRegForm> {
                     }
                     return null;
                   },
-                  style: TextStyle(fontSize: getProportionateScreenHeight(15)),
+                  style: TextStyle(fontSize: getProportionateScreenWidth(15)),
                   decoration: InputDecoration(
                     labelText: 'Break End Time',
                     suffixIcon: IconButton(
@@ -461,7 +461,7 @@ class _LocationRegFormState extends State<LocationRegForm> {
             }
             return null;
           },
-          style: TextStyle(fontSize: getProportionateScreenHeight(15)),
+          style: TextStyle(fontSize: getProportionateScreenWidth(15)),
           decoration: InputDecoration(
             labelText: 'Start Date',
             suffixIcon: IconButton(
@@ -511,7 +511,7 @@ class _LocationRegFormState extends State<LocationRegForm> {
             }
             return null;
           },
-          style: TextStyle(fontSize: getProportionateScreenHeight(15)),
+          style: TextStyle(fontSize: getProportionateScreenWidth(15)),
           decoration: InputDecoration(
             labelText: 'End Date',
             suffixIcon: IconButton(
@@ -582,7 +582,7 @@ class _LocationRegFormState extends State<LocationRegForm> {
               }
               return null;
             },
-            style: TextStyle(fontSize: getProportionateScreenHeight(15)),
+            style: TextStyle(fontSize: getProportionateScreenWidth(15)),
             decoration: InputDecoration(
               labelText: 'Test Start Time',
               suffixIcon: IconButton(
@@ -610,7 +610,7 @@ class _LocationRegFormState extends State<LocationRegForm> {
               }
               return null;
             },
-            style: TextStyle(fontSize: getProportionateScreenHeight(15)),
+            style: TextStyle(fontSize: getProportionateScreenWidth(15)),
             decoration: InputDecoration(
               labelText: 'Test End Time',
               suffixIcon: IconButton(

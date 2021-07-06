@@ -214,7 +214,7 @@ class PatientSummaryCard extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 14,
+                                  fontSize: getProportionateScreenWidth(14),
                                   fontWeight: FontWeight.bold))
                         ],
                       ),
@@ -234,7 +234,7 @@ class PatientSummaryCard extends StatelessWidget {
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 14,
+                                fontSize: getProportionateScreenWidth(14),
                                 fontWeight: FontWeight.bold,
                               ))
                         ],
@@ -253,8 +253,9 @@ class PatientSummaryCard extends StatelessWidget {
                               maxLines: 1,
                               softWrap: false,
                               textAlign: TextAlign.left,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 14))
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: getProportionateScreenWidth(14)))
                         ],
                       ),
                       SizedBox(height: 3),
@@ -273,8 +274,9 @@ class PatientSummaryCard extends StatelessWidget {
                               maxLines: 1,
                               softWrap: false,
                               textAlign: TextAlign.left,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16))
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: getProportionateScreenWidth(16)))
                         ],
                       )
                     ],
@@ -341,8 +343,9 @@ class BarcodeSummaryCard extends StatelessWidget {
                               maxLines: 1,
                               softWrap: false,
                               textAlign: TextAlign.left,
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12))
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: getProportionateScreenWidth(12)))
                         ],
                       ),
                       // ignore: deprecated_member_use
@@ -356,7 +359,9 @@ class BarcodeSummaryCard extends StatelessWidget {
                           color: paired ? Colors.green : Colors.grey,
                           child: Text(
                             paired ? "Paired" : "Pairing",
-                            style: TextStyle(color: Colors.white, fontSize: 12),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: getProportionateScreenWidth(12)),
                           ))
                     ],
                   ),

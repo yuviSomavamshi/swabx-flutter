@@ -127,7 +127,8 @@ class _RecentScansState extends State<RecentScans> {
           onChanged: (value) {
             _search = value;
           },
-          style: TextStyle(fontSize: 18, color: Colors.black45),
+          style: TextStyle(
+              fontSize: getProportionateScreenWidth(18), color: Colors.black45),
           decoration: InputDecoration(
               contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
               prefixIcon: Icon(Icons.people),
@@ -297,7 +298,9 @@ class ReportCard extends StatelessWidget {
                     color: Colors.green,
                     child: Text(
                       "Negative",
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: getProportionateScreenWidth(14)),
                     )),
                 SizedBox(height: 5),
                 // ignore: deprecated_member_use
@@ -326,7 +329,9 @@ class ReportCard extends StatelessWidget {
                     color: Colors.red,
                     child: Text(
                       "Positive",
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: getProportionateScreenWidth(14)),
                     )),
                 SizedBox(height: 5),
                 // ignore: deprecated_member_use
@@ -355,7 +360,9 @@ class ReportCard extends StatelessWidget {
                     color: Colors.deepOrange,
                     child: Text(
                       "Invalid",
-                      style: TextStyle(color: Colors.white, fontSize: 14),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: getProportionateScreenWidth(14)),
                     ))
               ])),
           actions: <Widget>[],
@@ -412,7 +419,7 @@ class ReportCard extends StatelessWidget {
                       report.result,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: getProportionateScreenWidth(14),
                           fontWeight: FontWeight.bold),
                     )),
               )

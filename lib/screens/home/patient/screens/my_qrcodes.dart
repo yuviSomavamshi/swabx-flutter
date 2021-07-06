@@ -226,14 +226,17 @@ class PatientCard extends StatelessWidget {
                           child: Text(
                         qrCode.name,
                         maxLines: 10,
-                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: getProportionateScreenWidth(16)),
                         overflow: TextOverflow.ellipsis,
                       )),
                       Text(
                         qrCode.relationship,
                         textAlign: TextAlign.left,
-                        style:
-                            TextStyle(color: Color(0XFF8C92A4), fontSize: 14),
+                        style: TextStyle(
+                            color: Color(0XFF8C92A4),
+                            fontSize: getProportionateScreenWidth(14)),
                         maxLines: 2,
                       ),
                       Text(
@@ -243,8 +246,9 @@ class PatientCard extends StatelessWidget {
                                     .millisecondsSinceEpoch)
                             : "-",
                         textAlign: TextAlign.left,
-                        style:
-                            TextStyle(color: Color(0XFF8C92A4), fontSize: 14),
+                        style: TextStyle(
+                            color: Color(0XFF8C92A4),
+                            fontSize: getProportionateScreenWidth(14)),
                         maxLines: 2,
                       )
                     ],

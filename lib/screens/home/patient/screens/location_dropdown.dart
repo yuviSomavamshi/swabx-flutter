@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swabx/models/Location.dart';
+import 'package:swabx/size_config.dart';
 
 class LocationDropDown extends StatelessWidget {
   final List<Location> locations;
@@ -32,7 +33,8 @@ class LocationDropDown extends StatelessWidget {
                           const SizedBox(width: 8.0),
                           Text(
                             e.location,
-                            style: const TextStyle(fontSize: 16.0),
+                            style: TextStyle(
+                                fontSize: getProportionateScreenWidth(16)),
                           )
                         ],
                       ),

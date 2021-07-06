@@ -114,7 +114,7 @@ class _BodyState extends State<Body> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.black.withOpacity(0.4),
-                            fontSize: 13)),
+                            fontSize: getProportionateScreenWidth(13))),
                     SizedBox(height: 10),
                   ],
                 ),

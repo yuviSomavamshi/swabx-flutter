@@ -63,8 +63,8 @@ SliverToBoxAdapter buildPreventionTips(double screenHeight, double percent) {
         children: <Widget>[
           Text(
             'Safety Tips',
-            style: const TextStyle(
-              fontSize: 18.0,
+            style: TextStyle(
+              fontSize: getProportionateScreenWidth(18),
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -80,8 +80,8 @@ SliverToBoxAdapter buildPreventionTips(double screenHeight, double percent) {
                         ),
                         Text(
                           e.values.first,
-                          style: const TextStyle(
-                            fontSize: 12.0,
+                          style: TextStyle(
+                            fontSize: getProportionateScreenWidth(12),
                             fontWeight: FontWeight.w500,
                           ),
                           textAlign: TextAlign.center,
@@ -117,18 +117,18 @@ SliverToBoxAdapter buildTogether(double screenHeight, double percentage) {
             children: <Widget>[
               Text(
                 'Stay Home!',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20.0,
+                  fontSize: getProportionateScreenWidth(20),
                   fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: screenHeight * 0.01),
               Text(
                 'Lets beat this Pandemic Together.',
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
-                  fontSize: 14.0,
+                  fontSize: getProportionateScreenWidth(14),
                 ),
                 maxLines: 2,
               ),
@@ -154,9 +154,9 @@ SliverPadding buildStatsHeader(String title) {
     sliver: SliverToBoxAdapter(
         child: Text(
       title,
-      style: const TextStyle(
+      style: TextStyle(
         color: Colors.black,
-        fontSize: 20.0,
+        fontSize: getProportionateScreenWidth(20),
         fontWeight: FontWeight.w600,
       ),
     )),
@@ -182,17 +182,20 @@ SliverPadding buildStatsTabBar(
             Tab(
                 child: Align(
               alignment: Alignment.center,
-              child: Text("Today", style: TextStyle(fontSize: 14)),
+              child: Text("Today",
+                  style: TextStyle(fontSize: getProportionateScreenWidth(14))),
             )),
             Tab(
                 child: Align(
               alignment: Alignment.center,
-              child: Text("Yesterday", style: TextStyle(fontSize: 14)),
+              child: Text("Yesterday",
+                  style: TextStyle(fontSize: getProportionateScreenWidth(14))),
             )),
             Tab(
                 child: Align(
               alignment: Alignment.center,
-              child: Text("Last 7 Days", style: TextStyle(fontSize: 14)),
+              child: Text("Last 7 Days",
+                  style: TextStyle(fontSize: getProportionateScreenWidth(14))),
             )),
           ],
           onTap: (index) {
@@ -266,17 +269,17 @@ class StatsGrid extends StatelessWidget {
           children: <Widget>[
             Text(
               title,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 18.0,
+                fontSize: getProportionateScreenWidth(18),
                 fontWeight: FontWeight.w600,
               ),
             ),
             Text(
               count,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
-                fontSize: 22.0,
+                fontSize: getProportionateScreenWidth(22),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -296,7 +299,9 @@ Widget customTextWidget(String text) {
       softWrap: false,
       textAlign: TextAlign.left,
       style: TextStyle(
-          color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold));
+          color: Colors.black,
+          fontSize: getProportionateScreenWidth(16),
+          fontWeight: FontWeight.bold));
 }
 
 SliverToBoxAdapter buildHeader(double screenHeight) {
