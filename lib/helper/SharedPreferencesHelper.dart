@@ -216,7 +216,6 @@ class SharedPreferencesHelper {
     }
     patients.removeWhere((c) => c.id == code.id && c.barcode == code.barcode);
     List<String> codes = patients.map((e) => json.encode(e)).toList();
-    print(codes.length);
     return prefs.setStringList(_prefix + "-" + _kPatientResultsCode, codes);
   }
 

@@ -53,7 +53,6 @@ class WebTimeScreen extends StatelessWidget {
 class Body extends StatelessWidget {
   Future<String> downloadData() async {
     String receiver = await SharedPreferencesHelper.getString("RECEIVER");
-    print(receiver);
     return Future.value(receiver); // return your response
   }
 
@@ -101,11 +100,8 @@ class Body extends StatelessWidget {
                             press: () async {
                               await SharedPreferencesHelper.removeString(
                                   "RECEIVER");
-                              String receiver =
-                                  await SharedPreferencesHelper.getString(
-                                      "RECEIVER");
-                              print(receiver);
-
+                              await SharedPreferencesHelper.getString(
+                                  "RECEIVER");
                               Navigator.pushNamedAndRemoveUntil(context,
                                   WebTimeScreen.routeName, (route) => false);
                             },

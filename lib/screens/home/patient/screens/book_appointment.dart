@@ -302,7 +302,6 @@ class _AppointmentTimeState extends State<AppointmentTime> {
         apiService
             .getAvailableSlots(_dateFormatYMD.format(dt), _location)
             .then((value) {
-          print(value);
           setState(() {
             _earlySlots = value["earlySlots"];
           });

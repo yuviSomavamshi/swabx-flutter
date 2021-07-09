@@ -50,12 +50,10 @@ class _ScanWebTimerQRCodeFormState extends State<ScanWebTimerQRCodeForm> {
   }
 
   void _getMessage(dynamic data) {
-    print(data);
     Map<String, dynamic> map = new Map<String, dynamic>();
     map = json.decode(data);
     setState(() async {
       if (map['status'] == "success") {
-        print(map['receiverName']);
         await SharedPreferencesHelper.setString(
             "RECEIVER", map['receiverName']);
         Toast.show("Successfully Paired Device", context,

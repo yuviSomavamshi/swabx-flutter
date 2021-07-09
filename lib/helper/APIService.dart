@@ -45,7 +45,6 @@ class APIService {
       options.headers["User-Agent"] = "HealthX-Mobile";
       options.headers["Accept"] = "application/json";
 
-      print('send request：path:${options.path}，baseURL:${options.baseUrl}');
       // Do something before request is sent
       return handler.next(options); //continue
       // If you want to resolve the request with some custom data，
@@ -63,7 +62,6 @@ class APIService {
       // If you want to reject the request with a error message,
       // you can reject a `DioError` object eg: return `dio.reject(dioError)`
     }, onError: (DioError error, handler) async {
-      print(error.response);
       if (error.type == DioErrorType.other ||
           error.type == DioErrorType.connectTimeout ||
           error.type == DioErrorType.receiveTimeout) {
@@ -72,8 +70,6 @@ class APIService {
               "External service is not responding.\nOR\nPlease check you have enabled the Mobile data."
         }, statusCode: 500, statusMessage: "No Internet", requestOptions: null);
       }
-      print(
-          'ERROR[${error.response?.statusCode}] => PATH: ${error.requestOptions?.path}');
       // Do something with response error
       if (error.response?.statusCode == 401 &&
           error.requestOptions?.path != "/accounts/refresh-token") {
@@ -89,12 +85,6 @@ class APIService {
           options.headers["User-Agent"] = "HealthX-Mobile";
           options.headers["Accept"] = "application/json";
 
-          print({
-            "Authorization": "Bearer " + token,
-            "Cookie": "refreshToken=" + cookie,
-            "User-Agent": "HealthX-Mobile",
-            "Accept": "application/json"
-          });
           var response = await http.post(
               Uri.parse(_endpoint + "/accounts/refresh-token"),
               body: {},
@@ -105,9 +95,6 @@ class APIService {
                 "Accept": "application/json"
               });
 
-          print(
-              "REFRESH_TOKEN:${response.statusCode}:${response.body}:COOKIE:refreshToken=" +
-                  cookie);
           if (response.statusCode == 200) {
             SharedPreferencesHelper.saveSession(
                 User.fromJson(jsonDecode(response.body)));
@@ -485,11 +472,10 @@ class APIService {
   Future<API> createLocation(Map<String, dynamic> payload) async {
     try {
       final response = await _dio.post('/customer/location', data: payload);
-      print(response.data);
       return API.fromJson(response.data);
-    } catch (error) {
-      print(error);
-      Map map = Map<String, dynamic>.from(error.response?.data);
+    } catch (e) {
+      print(e);
+      Map map = Map<String, dynamic>.from(e.response?.data);
       //map.putIfAbsent("statusCode", () => 500);
       return API.fromJson(map);
     }
@@ -593,9 +579,8 @@ class APIService {
 
   Future<bool> checkOutPatient(String patientId, String barcode) async {
     try {
-      final response = await _dio.post('/bc/checkout',
+      await _dio.post('/bc/checkout',
           data: {"patientId": patientId, "barcode": barcode});
-      print(response);
       return true;
     } on Exception catch (e) {
       print(e);

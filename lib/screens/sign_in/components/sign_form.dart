@@ -106,8 +106,8 @@ class _SignFormState extends State<SignForm> {
                           duration: kToastDuration, gravity: Toast.BOTTOM);
                     }
                   }
-                }).catchError((error) {
-                  print(error);
+                }).catchError((e) {
+                  print(e);
                   Toast.show(
                       "Something went wrong please try after sometime", context,
                       duration: kToastDuration, gravity: Toast.BOTTOM);
