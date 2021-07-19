@@ -38,8 +38,8 @@ dependencies:
   # if you are using latest flutter please update your flutter_svg package to ^0.18.*
   flutter_svg: ^0.22.0 # help us to use SVG in our app
   provider: ^5.0.0 # for State management
-  image_picker: ^0.7.4
-  image_cropper: ^1.4.0
+  image_picker: ^0.8.2
+  image_cropper: ^1.4.1
   qr_code_scanner: ^0.4.0
   country_icons: ^2.0.2
   circular_countdown: ^2.1.0

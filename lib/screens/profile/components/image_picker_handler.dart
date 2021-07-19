@@ -16,14 +16,14 @@ class ImagePickerHandler {
   openCamera() async {
     imagePicker.dismissDialog();
     final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
     cropImage(File(pickedFile.path));
   }
 
   openGallery() async {
     imagePicker.dismissDialog();
     final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     cropImage(File(pickedFile.path));
   }
 

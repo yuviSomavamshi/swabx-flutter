@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:http/io_client.dart';
 import 'package:swabx/helper/SharedPreferencesHelper.dart';
 import 'package:swabx/models/API.dart';
 import 'package:swabx/models/Appointment.dart';
@@ -15,7 +16,6 @@ import 'package:meta/meta.dart';
 import '../constants.dart';
 import 'Convertor.dart';
 import 'navigate.dart';
-import 'package:http/http.dart' as http;
 
 class APIService {
   final String _endpoint = kWebsite + "/api/v1";
@@ -85,6 +85,10 @@ class APIService {
           options.headers["User-Agent"] = "HealthX-Mobile";
           options.headers["Accept"] = "application/json";
 
+          final ioc = new HttpClient();
+          ioc.badCertificateCallback =
+              (X509Certificate cert, String host, int port) => true;
+          final http = new IOClient(ioc);
           var response = await http.post(
               Uri.parse(_endpoint + "/accounts/refresh-token"),
               body: {},
@@ -96,12 +100,17 @@ class APIService {
               });
 
           if (response.statusCode == 200) {
-            SharedPreferencesHelper.saveSession(
-                User.fromJson(jsonDecode(response.body)));
+            User res = User.fromJson(jsonDecode(response.body));
+            SharedPreferencesHelper.saveSession(res);
             return _dio.request(
                 error.requestOptions.baseUrl + error.requestOptions.path,
                 data: error.requestOptions.data,
-                options: Options(method: error.requestOptions.method));
+                options: Options(method: error.requestOptions.method, headers: {
+                  "Authorization": "Bearer " + res.jwtToken,
+                  "Cookie": res.refreshToken,
+                  "User-Agent": "HealthX-Mobile",
+                  "Accept": "application/json"
+                }));
           } else {
             SharedPreferencesHelper.clearSession();
             NavigationService.instance.navigateTo("/sign_in");
