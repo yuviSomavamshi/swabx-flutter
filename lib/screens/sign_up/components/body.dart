@@ -1,8 +1,12 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:swabx/constants.dart';
 import 'package:swabx/size_config.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'sign_up_form.dart';
+
+const _url = 'https://swabx.healthx.global/privacy-policy.html';
 
 class Body extends StatelessWidget {
   @override
@@ -29,10 +33,23 @@ class Body extends StatelessWidget {
                 SizedBox(height: SizeConfig.screenHeight * 0.02),
                 SignUpForm(),
                 SizedBox(height: getProportionateScreenHeight(20)),
-                Text(
-                  'By continuing your confirm that you agree \nwith our Terms and Conditions',
+                RichText(
+                  text: TextSpan(
+                      text:
+                          "By continuing your confirm that you agree \nwith our ",
+                      style: Theme.of(context).textTheme.caption,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Terms and Conditions',
+                          style: Theme.of(context).textTheme.caption.merge(
+                              TextStyle(
+                                  color: Colors.blue,
+                                  decoration: TextDecoration.underline)),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = _launchURL,
+                        )
+                      ]),
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.caption,
                 ),
                 SizedBox(height: getProportionateScreenHeight(30)),
                 Text("Secure Password Tips:"),
@@ -48,3 +65,6 @@ class Body extends StatelessWidget {
     );
   }
 }
+
+void _launchURL() async =>
+    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';

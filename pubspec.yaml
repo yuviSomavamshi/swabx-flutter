@@ -50,7 +50,8 @@ dependencies:
   time_range: ^1.0.0
   date_picker_timeline: ^1.2.3
   weekday_selector: ^1.0.0
-
+  url_launcher: ^6.0.9
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
