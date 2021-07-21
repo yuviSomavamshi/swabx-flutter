@@ -167,13 +167,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.2"
-  flutter_socket_io:
-    dependency: "direct main"
-    description:
-      name: flutter_socket_io
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.6.0"
   flutter_spinkit:
     dependency: "direct main"
     description:
@@ -254,13 +247,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
-  jwt_decoder:
-    dependency: "direct main"
-    description:
-      name: jwt_decoder
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   local_auth:
     dependency: "direct main"
     description:
@@ -504,13 +490,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0+5"
-  time_range:
-    dependency: "direct main"
-    description:
-      name: time_range
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   toast:
     dependency: "direct main"
     description:

@@ -9,8 +9,6 @@ import 'package:flutter/widgets.dart';
 import 'package:swabx/screens/change_password/change_password_screen.dart';
 import 'package:swabx/screens/home/customer/screens/add_location.dart';
 import 'package:swabx/screens/home/customer/screens/add_staff.dart';
-import 'package:swabx/screens/home/staff/pair_devices/pair_web_timer.dart';
-import 'package:swabx/screens/home/staff/pair_devices/web_timer_qr_scanner.dart';
 import 'package:swabx/screens/home/patient/screens/add_patient.dart';
 import 'package:swabx/screens/reset_password/reset_password_screen.dart';
 import 'package:swabx/screens/forgot_password/forgot_password_screen.dart';
@@ -45,8 +43,6 @@ final Map<String, WidgetBuilder> routes = {
   ScanDeviceBarcode.routeName: (context) => ScanDeviceBarcode(),
   ScanSummaryScreen.routeName: (context) => ScanSummaryScreen(),
   ResultScreen.routeName: (context) => ResultScreen(),
-  WebTimeScreen.routeName: (context) => WebTimeScreen(),
-  ScanWebTimeQRCode.routeName: (context) => ScanWebTimeQRCode(),
   LocationHomeScreenBody.routeName: (context) => LocationHomeScreenBody(),
   BookAnAppointment.routeName: (context) => BookAnAppointment(),
   DefaultTestLocation.routeName: (context) => DefaultTestLocation()
