@@ -2,11 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:swabx/constants.dart';
 import 'package:swabx/size_config.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'sign_up_form.dart';
-
-const _url = 'https://swabx.healthx.global/privacy-policy.html';
 
 class Body extends StatelessWidget {
   @override
@@ -46,7 +43,7 @@ class Body extends StatelessWidget {
                                   color: Colors.blue,
                                   decoration: TextDecoration.underline)),
                           recognizer: TapGestureRecognizer()
-                            ..onTap = _launchURL,
+                            ..onTap = () => launchURL(kPrivacyPolicyWebpage),
                         )
                       ]),
                   textAlign: TextAlign.center,
@@ -65,6 +62,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-void _launchURL() async =>
-    await canLaunch(_url) ? await launch(_url) : throw 'Could not launch $_url';

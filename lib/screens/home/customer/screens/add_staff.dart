@@ -10,6 +10,7 @@ import 'package:swabx/components/default_button.dart';
 import 'package:swabx/constants.dart';
 import 'package:swabx/size_config.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter/gestures.dart';
 
 final password = RandomPasswordGenerator();
 
@@ -100,13 +101,25 @@ class _StaffRegFormState extends State<StaffRegForm> {
                   });
                 },
               ),
-              Text(
-                "I Agree to Terms & Conditions",
+              RichText(
+                text: TextSpan(
+                    text: "I agree to the ",
+                    style: TextStyle(
+                        fontSize: getProportionateScreenWidth(16),
+                        color: kPrimaryColor),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Terms and Conditions',
+                        style: TextStyle(
+                            fontSize: getProportionateScreenWidth(16),
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () => launchURL(kPrivacyPolicyWebpage),
+                      )
+                    ]),
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: getProportionateScreenWidth(16),
-                    color: kPrimaryColor),
-              )
+              ),
             ]),
             SizedBox(height: getProportionateScreenHeight(10)),
             DefaultButton(

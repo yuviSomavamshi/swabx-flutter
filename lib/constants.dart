@@ -6,11 +6,14 @@ import 'package:swabx/styles.dart';
 import 'helper/QRCodeAlert.dart';
 import 'models/QRCode.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 const kAppName = "SwabX";
 const kAppTitleText = "Swab";
 const kWebsite = "https://swabx.healthx.global";
 //const kWebsite = "http://192.168.0.101";
+const kPrivacyPolicyWebpage =
+    "https://swabx.healthx.global/privacy-policy.html";
 const kPrimaryColor = Color(0xFF112855);
 const kPrimaryCustomColor = Color(0XFFF58C29);
 const kTracieFontFamily = "Kaushan Script";
@@ -761,3 +764,6 @@ getCountryCodeByName(String name) {
   }
   return name;
 }
+
+void launchURL(String url) async =>
+    await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
