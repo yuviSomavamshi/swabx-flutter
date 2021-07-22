@@ -34,7 +34,9 @@ class _BodyState extends State<Body> {
                   context, MyHomeScreen.routeName, (route) => false);
             }
           } else {
-            SystemNavigator.pop();
+            SharedPreferencesHelper.clearSession();
+            Navigator.pushNamedAndRemoveUntil(
+                context, SignInScreen.routeName, (route) => false);
           }
         } else {
           Navigator.pushNamedAndRemoveUntil(
